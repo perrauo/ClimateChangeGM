@@ -4,6 +4,11 @@
 rel_posX = x - planet.x;
 rel_posY = y - planet.y;
 
+
+//show_debug_message(rel_posX);
+//show_debug_message(rel_posY);
+
+
 ////vector from ship toward center of grav of the planet 
 ship_to_centerX = -rel_posX;
 ship_to_centerY = -rel_posY;
@@ -16,16 +21,17 @@ grav_pullY = unit_vec[1]*GRAV_PULL;
 
 //set new target angle
 //TODO: rotate smoothly
-//negative rel_posY is necessary as game maker inverts the y axis
-var ang = arcsin(-rel_posY/(sqrt(sqr(rel_posX)+sqr(rel_posY)))); 
-
-curr_ship_angle = scr_adjustQuadrant(ang);
+curr_ship_angle = degtorad(point_direction(planet.x, planet.y, x, y));
 
 
 var rotated_vec = scr_rotateVector(ORB_VEC_X,ORB_VEC_Y,curr_ship_angle); //rotate base vector
-unit_vec = scr_getUnitVector(rotated_vec[0], rotated_vec[1]);
-orb_dirX = unit_vec[0];
-orb_dirY = unit_vec[1];
+orb_dirX = rotated_vec[0];
+orb_dirY = rotated_vec[1];
+
+	show_debug_message("XDir")
+	show_debug_message(orb_dirX)
+	show_debug_message("YDir")
+	show_debug_message(orb_dirY)
 
 
 if(key_right) ||(key_left)
@@ -34,18 +40,17 @@ if(key_right) ||(key_left)
 //Apply movement & designated spd
 if(key_right)
 {
-	//var unit_vec = scr_getUnitVector(orb_spdX, orb_spdY);
+	//scaled by ORB_SPD
 	orb_spdX = orb_dirX*ORB_SPD;
 	orb_spdY = orb_dirY*ORB_SPD;
 }
 else if(key_left)
 {	
-		
+			//scaled by -ORB_SPD
 	orb_spdX = orb_dirX*-ORB_SPD;
 	orb_spdY = orb_dirY*-ORB_SPD;
 	
 }
-
 
 
 
@@ -54,8 +59,14 @@ else if(key_left)
 //detect if not moving
 if(key_right && key_left) || (!key_right && !key_left)
 {
+	if(orb_spdX<.5) && (orb_spdX > -.5) //if between these values stop
 	orb_spdX = 0;
+	else
+	orb_spdX/=ORB_SMOOTH;
+	if(orb_spdY<.5) && (orb_spdY > -.5) //if between these values stop
 	orb_spdY = 0;
+	else
+	orb_spdY/=ORB_SMOOTH;
 }
 
 
@@ -63,13 +74,14 @@ if(key_right && key_left) || (!key_right && !key_left)
 scr_planetCollision()//check for collision and limmit movement
 
 
-////apply gravity
-x += orb_spdX; 
-y += orb_spdY; 
-
 //apply gravity
 x += grav_pullX; 
 y += grav_pullY; 
+
+
+////apply gravity
+x += orb_spdX; 
+y += orb_spdY; 
 
 
 
