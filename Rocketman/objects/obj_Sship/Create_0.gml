@@ -19,12 +19,10 @@ ORB_VEC_Y = 1;
 
 ORB_SMOOTH = 1.08;
 
+//hspd and vspd
+hspd = 0;
+vspd = 0;
 
-orb_dirX = 0;//indicate curr direction
-orb_dirY = 1;
-
-orb_spdX = 0; //spd in a given dir
-orb_spdY = 1;
 
 
 ////vector pulling down toward a circle is 
@@ -33,9 +31,6 @@ grav_pullX = 0;
 grav_pullY = 1;
 
 
-
-
-
-
+grav_mass = 0; //gravitational mass of the ship
 
 

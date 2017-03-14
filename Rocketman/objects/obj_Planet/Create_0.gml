@@ -7,3 +7,7 @@ ship = instance_find(obj_Sship, 0);
 
 //Properties
 ship_inOrbit = false
+
+//planet mass
+mass = 1;
+

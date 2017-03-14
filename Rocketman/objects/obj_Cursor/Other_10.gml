@@ -8,8 +8,8 @@ var rotated_vec = scr_rotateVector(ORB_VEC_X,ORB_VEC_Y,curr_ship_angle); //rotat
 orb_dirX = rotated_vec[0];
 orb_dirY = rotated_vec[1];
 
-	show_debug_message("XDir")
-	show_debug_message(orb_dirX)
-	show_debug_message("YDir")
-	show_debug_message(orb_dirY)
+	//show_debug_message("XDir")
+	//show_debug_message(orb_dirX)
+	//show_debug_message("YDir")
+	//show_debug_message(orb_dirY)
 
