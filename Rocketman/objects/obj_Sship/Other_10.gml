@@ -26,15 +26,10 @@ grav_mass = planet.mass* GRAV_PULL; //gravitational mass
 var _force = grav_mass/power(dot_product(grav_pullx, grav_pully, grav_pullx, grav_pully),1.5);
 
 
-//apply gravity
-hspd += grav_pullx * _force;
-vspd += grav_pully * _force; 
-
-
 //find normal vector to grav_pull for movement along the orbit
 var unit_vec = scr_getUnitVector(grav_pullx, grav_pully)
-var orb_spdx = unit_vec[1];
-var orb_spdy = -unit_vec[0];
+var orb_dirx = unit_vec[1];
+var orb_diry = -unit_vec[0];
  
 
 if(key_right) ||(key_left)
@@ -43,35 +38,52 @@ if(key_right) ||(key_left)
 //Apply movement & designated spd
 if(key_right)
 {
-	  hspd += orb_spdx*ORB_SPD;
-	  vspd += orb_spdy*ORB_SPD;
+	  hspd += orb_dirx*ORB_SPD;
+	  vspd += orb_diry*ORB_SPD;
 }
 else if(key_left)
 {	
-	hspd += orb_spdx*-ORB_SPD;
-	vspd += orb_spdy*-ORB_SPD;
+	hspd += orb_dirx*-ORB_SPD;
+	vspd += orb_diry*-ORB_SPD;
 	
 }
 
 
-
 }
 
 
-//detect if not moving
-if(key_right && key_left) || (!key_right && !key_left)
+
+///LAUNCHING SHIP
+
+if(grounded)
 {
-	//ease out of motion
+	show_debug_message("GROUNDED");
+	
+	if(key_space) //direction is chosen on the ground only on first frame
+	{
+	var unit_vec = scr_getUnitVector(rel_posX, rel_posY)
+	//counter gravity unit vector
+	var launch_dirx = -unit_vec[0];
+	var launch_diry = -unit_vec[1];
 
-	//if(hspd<.5) && (hspd> -.5) //if between these values stop
-	//hspd = 0;
-	//else
-	//hspd/=ORB_SMOOTH;
-	//if(vspd<.5) && (vspd > -.5) //if between these values stop
-	//vspd = 0;
-	//else
-	//vspd/=ORB_SMOOTH;
+	if(key_space)
+	{
+	   hspd += grav_pullx * -LAUNCH_SPD;
+	   vspd += grav_pully * -LAUNCH_SPD;
+	}
+	}
+
 }
+else //apply grav if not grounded & terminal velocity is reached
+{
+	//apply gravity
+	hspd += grav_pullx * _force;
+	vspd += grav_pully * _force; 
+
+}
+
+
+
 
 
 
@@ -79,14 +91,8 @@ scr_planetCollision()//check for collision stop movement
 
 
 
-if(key_space)
-{
-  //TODO: Launch ship
-}
 
-
-
-////apply gravity
+////apply movement
 x += hspd; 
 y += vspd; 
 

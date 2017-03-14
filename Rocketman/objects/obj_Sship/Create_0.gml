@@ -11,13 +11,14 @@ hspd = 0;
 vspd = 0;
 
 grav_mass = 1; //gravitational mass of the ship
+grounded = false;
 
 ///////////constants
 
 //force of propulsion
-PROP_SPD = 2; //propulsion spd
+LAUNCH_SPD = .08; //propulsion spd
 //constants
-ORB_SPD = .5; 
+ORB_SPD = .3; 
 ORB_SMOOTH = 1.08;
 
 GRAV_PULL = 200; //force of the pull

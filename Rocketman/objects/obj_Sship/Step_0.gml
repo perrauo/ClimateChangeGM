@@ -4,6 +4,8 @@
 key_left = keyboard_check(vk_left);
 key_right = keyboard_check(vk_right);
 key_space = keyboard_check(vk_space);
+key_space_pressed = keyboard_check_pressed(vk_space);
+
 
 //TODO: check if planet exists at all
 planet = instance_nearest(x, y, obj_Planet); //access the closest planet
