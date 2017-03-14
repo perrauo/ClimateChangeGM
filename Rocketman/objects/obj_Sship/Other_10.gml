@@ -5,10 +5,6 @@ rel_posX = x - planet.x;
 rel_posY = y - planet.y;
 
 
-//show_debug_message(rel_posX);
-//show_debug_message(rel_posY);
-
-
 ////vector from ship toward center of grav of the planet 
 ship_to_centerX = -rel_posX;
 ship_to_centerY = -rel_posY;
@@ -24,6 +20,8 @@ grav_pullY = unit_vec[1]*GRAV_PULL;
 curr_ship_angle = degtorad(point_direction(planet.x, planet.y, x, y));
 
 
+
+//Where ORB_VEC is the constant vector (0,1)
 var rotated_vec = scr_rotateVector(ORB_VEC_X,ORB_VEC_Y,curr_ship_angle); //rotate base vector
 orb_dirX = rotated_vec[0];
 orb_dirY = rotated_vec[1];
@@ -46,7 +44,7 @@ if(key_right)
 }
 else if(key_left)
 {	
-			//scaled by -ORB_SPD
+	//scaled by -ORB_SPD
 	orb_spdX = orb_dirX*-ORB_SPD;
 	orb_spdY = orb_dirY*-ORB_SPD;
 	
@@ -59,6 +57,8 @@ else if(key_left)
 //detect if not moving
 if(key_right && key_left) || (!key_right && !key_left)
 {
+	//ease out of motion
+
 	if(orb_spdX<.5) && (orb_spdX > -.5) //if between these values stop
 	orb_spdX = 0;
 	else
@@ -71,7 +71,7 @@ if(key_right && key_left) || (!key_right && !key_left)
 
 
 
-scr_planetCollision()//check for collision and limmit movement
+scr_planetCollision()//check for collision stop movement
 
 
 //apply gravity
@@ -87,7 +87,7 @@ y += orb_spdY;
 
 if(key_space)
 {
-
+  //TODO: Launch ship
 }
 
 
