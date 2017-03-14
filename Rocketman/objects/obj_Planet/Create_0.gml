@@ -9,5 +9,5 @@ ship = instance_find(obj_Sship, 0);
 ship_inOrbit = false
 
 //planet mass
-mass = 1;
+mass = 30;
 

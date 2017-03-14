@@ -1,36 +1,41 @@
 /// @description in Orbit
 
-
 //set new target angle
 //TODO: rotate smoothly
 curr_ship_angle = degtorad(point_direction(planet.x, planet.y, x, y));//for sprite
-
 
 //ship position in relation to the planet
 rel_posX = x - planet.x;
 rel_posY = y - planet.y;
 
-
 ////vector from ship toward center of grav of the planet 
-ship_to_centerX = -rel_posX;
-ship_to_centerY = -rel_posY;
+var ship_to_centerX = -rel_posX;
+var ship_to_centerY = -rel_posY;
 
-
-var _x2 = ship_to_centerX;
-var _y2 = ship_to_centerY; 
+//constitute the basis for our gravity vector
+var grav_pullx = ship_to_centerX;
+var grav_pully = ship_to_centerY; 
 
 //I'm combining a distance computation with vector normalization and 
 //inverse distance squared falloff
+
+//planet.mass 5, GRAV_PULL = 25
 grav_mass = planet.mass* GRAV_PULL; //gravitational mass
 
 //magnitude of ship_to_center vector:  power(dot_product(_x2,_y2,_x2,_y2),1.5);
-var _f = grav_mass/power(dot_product(_x2,_y2,_x2,_y2),1.5);
+var _force = grav_mass/power(dot_product(grav_pullx, grav_pully, grav_pullx, grav_pully),1.5);
 
 
-//orb_spdX += _x2 * _f;
-//orb_spdY += _y2 * _f;    
+//apply gravity
+hspd += grav_pullx * _force;
+vspd += grav_pully * _force; 
 
 
+//find normal vector to grav_pull for movement along the orbit
+var unit_vec = scr_getUnitVector(grav_pullx, grav_pully)
+var orb_spdx = unit_vec[1];
+var orb_spdy = -unit_vec[0];
+ 
 
 if(key_right) ||(key_left)
 {
@@ -38,13 +43,13 @@ if(key_right) ||(key_left)
 //Apply movement & designated spd
 if(key_right)
 {
-	hspd += _x2 * _f;
-	vspd += _y2 * _f;   
+	  hspd += orb_spdx*ORB_SPD;
+	  vspd += orb_spdy*ORB_SPD;
 }
 else if(key_left)
 {	
-	hspd += _x2 * _f* -1;
-	vspd += _y2 * _f* -1;   
+	hspd += orb_spdx*-ORB_SPD;
+	vspd += orb_spdy*-ORB_SPD;
 	
 }
 
@@ -52,34 +57,25 @@ else if(key_left)
 
 }
 
-//Always 0 for both
-show_debug_message(hspd);
-show_debug_message(vspd);
-
 
 //detect if not moving
 if(key_right && key_left) || (!key_right && !key_left)
 {
 	//ease out of motion
 
-	if(hspd<.5) && (hspd> -.5) //if between these values stop
-	hspd = 0;
-	else
-	hspd/=ORB_SMOOTH;
-	if(vspd<.5) && (vspd > -.5) //if between these values stop
-	vspd = 0;
-	else
-	vspd/=ORB_SMOOTH;
+	//if(hspd<.5) && (hspd> -.5) //if between these values stop
+	//hspd = 0;
+	//else
+	//hspd/=ORB_SMOOTH;
+	//if(vspd<.5) && (vspd > -.5) //if between these values stop
+	//vspd = 0;
+	//else
+	//vspd/=ORB_SMOOTH;
 }
 
 
 
 scr_planetCollision()//check for collision stop movement
-
-
-////apply gravity
-x += vspd; 
-y += vspd; 
 
 
 
@@ -90,8 +86,7 @@ if(key_space)
 
 
 
-
-
-
-
+////apply gravity
+x += hspd; 
+y += vspd; 
 
