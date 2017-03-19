@@ -5,16 +5,14 @@
 
 
 
-
-
 if(place_meeting(x+hspd, y,obj_Planet))
 {
 
-	grounded = false;
+//	grounded = false;
 	while(!place_meeting(x+sign(hspd),y,obj_Planet))
 	{
 		x+= sign(hspd);
-	
+			
 	}
 	hspd = 0; //when sufficiently close
 	
@@ -28,22 +26,18 @@ grounded = false;
 //precise collision detection
 if(place_meeting(x, y+vspd,obj_Planet))
 {
-	grounded = false;
+//	grounded = false;
 	while(!place_meeting(x,y+sign(vspd),obj_Planet))
 	{
 		y+= sign(vspd);
-	
+			
 	}
 	vspd = 0; //when sufficiently close
-	
 	grounded = true;//indicate the ship has landed
 
-
 }
-else if (!place_meeting(x,y+sign(hspd),obj_Planet)) //if not landed vertically either than not grounded
+else if (!place_meeting(x+sign(hspd),y,obj_Planet)) //if not landed vertically either than not grounded
 grounded = false;
-
-
 
 
 

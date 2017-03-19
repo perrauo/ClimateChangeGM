@@ -38,38 +38,48 @@ if(key_right) ||(key_left)
 //Apply movement & designated spd
 if(key_right)
 {
-	  hspd += orb_dirx*ORB_SPD;
-	  vspd += orb_diry*ORB_SPD;
+	//  hspd += orb_dirx*ORB_SPD;
+	  //vspd += orb_diry*ORB_SPD;
 }
 else if(key_left)
 {	
-	hspd += orb_dirx*-ORB_SPD;
-	vspd += orb_diry*-ORB_SPD;
+	//hspd += orb_dirx*-ORB_SPD;
+	//vspd += orb_diry*-ORB_SPD;
 	
 }
 
 
 }
-
+scr_planetCollision();//check for collision stop movement
 
 
 ///LAUNCHING SHIP
 
 if(grounded)
 {
-	show_debug_message("GROUNDED");
+	//show_debug_message("GROUNDED");
 	
-	if(key_space) //direction is chosen on the ground only on first frame
+	if(key_space_pressed) //direction is chosen on the ground only on first frame
 	{
-	var unit_vec = scr_getUnitVector(rel_posX, rel_posY)
-	//counter gravity unit vector
-	var launch_dirx = -unit_vec[0];
-	var launch_diry = -unit_vec[1];
-
+	grounded = false;
+	
 	if(key_space)
 	{
 	   hspd += grav_pullx * -LAUNCH_SPD;
 	   vspd += grav_pully * -LAUNCH_SPD;
+	   
+	   	   //set part type to emit and alarm to stop
+		   EM_TY = PART_EMIT_TYPE.LAUNCHING;
+		   part_amount_smoke =100;
+		   part_amount_fire =50;
+		   
+		      alarm_set(1,50);
+			  
+			  
+			  //UI is going t be destoryed
+			 UI.marked_for_destr = true; 
+			 
+		
 	}
 	}
 
@@ -85,14 +95,13 @@ else //apply grav if not grounded & terminal velocity is reached
 
 
 
-
-
-scr_planetCollision()//check for collision stop movement
-
-
-
-
 ////apply movement
-x += hspd; 
-y += vspd; 
+
+if(!grounded)
+{
+phy_position_x += hspd; 
+phy_position_y += vspd; 
+}
+
+
 
