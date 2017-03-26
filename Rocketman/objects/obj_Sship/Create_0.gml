@@ -2,6 +2,11 @@
 
 layer = global.foreground;
 
+//Closest planey
+
+planet = noone;
+
+
 
 ///////////////////////////////////VARS
 curr_ship_angle = 0; //angles

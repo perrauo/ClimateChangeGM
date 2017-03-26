@@ -18,7 +18,8 @@
         "98effd22-7741-41e5-b89a-feff12fa0d64",
         "7c2985c4-231e-4582-81c6-c6bee2f077fd",
         "b60de278-3fc9-4301-aff3-a9dbb5d471ec",
-        "85240548-9bb3-4f7a-84a8-ee421247ede6"
+        "85240548-9bb3-4f7a-84a8-ee421247ede6",
+        "b98842ce-a39d-4947-8756-6b1bedcd09c7"
     ],
     "layers": [
         {
@@ -44,6 +45,30 @@
             "userdefined_depth": false,
             "visible": true,
             "instances": [
+                {
+                    "id": "b98842ce-a39d-4947-8756-6b1bedcd09c7",
+                    "modelName": "GMRInstance",
+                    "mvc": "1.0",
+                    "ignore": false,
+                    "inheritItemSettings": false,
+                    "m_originalParentID": "00000000-0000-0000-0000-000000000000",
+                    "m_serialiseFrozen": false,
+                    "name": "inst_3BA4A24C",
+                    "x": 0,
+                    "y": 0,
+                    "IsDnD": false,
+                    "colour": {
+                        "Value": 4294967295
+                    },
+                    "creationCodeFile": "",
+                    "creationCodeType": "",
+                    "inheritCode": false,
+                    "name_with_no_file_rename": "inst_3BA4A24C",
+                    "objId": "660448d1-59aa-449b-8a51-c4a2b05915d2",
+                    "rotation": 0,
+                    "scaleX": 1,
+                    "scaleY": 1
+                },
                 {
                     "id": "a57bb393-f9e7-4457-ad4b-299f0234a7b1",
                     "modelName": "GMRInstance",
@@ -101,8 +126,8 @@
                     "m_originalParentID": "00000000-0000-0000-0000-000000000000",
                     "m_serialiseFrozen": false,
                     "name": "inst_5B8181A4",
-                    "x": 608,
-                    "y": 192,
+                    "x": 512,
+                    "y": 384,
                     "IsDnD": false,
                     "colour": {
                         "Value": 4294967295

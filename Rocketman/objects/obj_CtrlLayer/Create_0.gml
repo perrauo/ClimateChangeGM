@@ -12,3 +12,5 @@ global.GUI = layer_create(-50, "GUI");
 
 global.GUI_comp = layer_create(-60, "GUI_comp");
 
+global.Menus = layer_create(-200, "Menus");
+

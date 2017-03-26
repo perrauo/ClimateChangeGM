@@ -2,7 +2,6 @@
 // You can write your code in this editor
 
 
-
 //planets
 instance_create_layer(235, 100,global.middleground, obj_Planet);
 

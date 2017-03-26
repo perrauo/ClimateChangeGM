@@ -37,10 +37,22 @@ alpha_alive = 0; //for transition
 alpha_arid = 0;
 
 
-//Transition begin -> from alive to arid
-trans_begin = false;
+//pop sprites
+sprite_pop_happy = 0;
+sprite_pop_sad = 0;
 
+population_happy = true;
 
+tim1 = 0;
+lim1 = 1;
+anim_frame1 = 0;
 
+tim2 = 0;
+lim2 = 1;
+anim_frame2 = 0;
+
+tim3 = 0;
+lim3 = 2;
+anim_frame3 = 0;
 
 

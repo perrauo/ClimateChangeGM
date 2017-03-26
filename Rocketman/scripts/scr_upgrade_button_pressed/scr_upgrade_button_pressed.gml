@@ -38,14 +38,17 @@ if(button_clicked)
 	if(global.upgrd_count[upgrd_index]<5) //cap reached
 	{
 	 //set as uninteractable
-	upgrd_butt = instance_create_layer(x+x_offset,y,global.GUI_comp,obj_Upgrade_Button);
+	var upgrd_butt = instance_create_layer(x+x_offset,y,global.GUI_comp,obj_Upgrade_Button);
 	upgrd_butt.upgrd_index = upgrd_index; //set correct index
+	
 	}
 	
 	global.upgrd_count[upgrd_index]++; //increase upgrd count
 	global.curr_resources_available--;
 	
 }
+
+
 
 
 

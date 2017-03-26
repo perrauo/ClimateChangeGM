@@ -41,11 +41,6 @@ grounded = false;
 
 
 
-
-
-
-
-
 ////precise collision detection
 //////////////////////////////////////GRAVITY_PULL
 
